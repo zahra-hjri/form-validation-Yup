@@ -11,11 +11,12 @@ const SignupForm = () => {
     },
     validationSchema: Yup.object({
       firstName: Yup.string()
-        .max(15, 'Must be 15 characters')
+        .max(12, 'Must be 15 characters')
         .min(3, 'Must be more than 3 characters')
         .required('Required'),
       lastName: Yup.string()
-        .max(20, 'Must be 20 characters or less')
+        .max(12, 'Must be 20 characters or less')
+        .min(5, 'Must be more than 5 characters')
         .required('Required'),
       email: Yup.string().email('Invalid email address').required('Required'),
     }),
@@ -24,8 +25,10 @@ const SignupForm = () => {
     },
   });
   return (
-    <form onSubmit={formik.handleSubmit} className='flex flex-col bg-green-300 border border-white w-72 md:w-3/5 lg:w-3/6 xl:w-5/12 rounded-lg mx-auto p-5'>
-      {/* <label htmlFor="firstName">First Name</label> */}
+    <form onSubmit={formik.handleSubmit} className='flex flex-col bg-green-300 border border-white w-72 md:w-3/5 lg:w-3/6 xl:w-5/12 rounded-lg mx-auto px-8 py-10'>
+      {formik.touched.firstName && formik.errors.firstName ? (
+        <div className='text-red-500 text-sm md:text-md'>{formik.errors.firstName}</div>
+      ) : null}
       <input
         id="firstName"
         name="firstName"
@@ -34,13 +37,13 @@ const SignupForm = () => {
         onChange={formik.handleChange}
         onBlur={formik.handleBlur}
         value={formik.values.firstName}
-        className='bg-white p-2 w-auto rounded-lg outline-none'
+        className='bg-white p-2 w-auto rounded-lg outline-none mb-5'
       />
-      {formik.touched.firstName && formik.errors.firstName ? (
-        <div className='text-red-500'>{formik.errors.firstName}</div>
-      ) : null}
+      
 
-      {/* <label htmlFor="lastName">Last Name</label> */}
+      {formik.touched.lastName && formik.errors.lastName ? (
+        <div className='text-red-500 text-sm md:text-md'>{formik.errors.lastName}</div>
+      ) : null}
       <input
         id="lastName"
         name="lastName"
@@ -51,11 +54,12 @@ const SignupForm = () => {
         value={formik.values.lastName}
         className='bg-white p-2 w-auto rounded-lg outline-none mb-5'
       />
-      {formik.touched.lastName && formik.errors.lastName ? (
-        <div className='text-red-300'>{formik.errors.lastName}</div>
-      ) : null}
+      
 
-      {/* <label htmlFor="email">Email Address</label> */}
+      
+      {formik.touched.email && formik.errors.email ? (
+        <div className='text-red-500 text-sm md:text-md'>{formik.errors.email}</div>
+      ) : null}
       <input
         id="email"
         name="email"
@@ -67,11 +71,9 @@ const SignupForm = () => {
         className='bg-white p-2 w-auto rounded-lg outline-none mb-5'
 
       />
-      {formik.touched.email && formik.errors.email ? (
-        <div>{formik.errors.email}</div>
-      ) : null}
+      
 
-      <button className='btn btn-success text-white font-bold w-52 md:w-60 lg:w-72 mx-auto' type="submit">Submit</button>
+      <button className='btn btn-success text-white font-bold w-52 md:w-60 lg:w-72 mx-auto my-5' type="submit">Submit</button>
     </form>
   );
 };
