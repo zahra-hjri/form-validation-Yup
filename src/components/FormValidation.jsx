@@ -74,7 +74,7 @@ const SignupForm = () => {
     },
   });
   return (
-   <div>
+   <div className='pb-20'>
         {suceess &&
         formik.submitCount > 0 &&
         !Object.keys(formik.errors).length && (
@@ -166,7 +166,7 @@ const SignupForm = () => {
             type="checkbox"
             onChange={formik.handleChange}
           ></input>
-          <label className='px-2 text-white font-bold' htmlFor="">accept the rules</label>
+          <label className='px-2 text-white text-xs md:font-bold' htmlFor="">accept the rules</label>
           </div>
       
       <div className='flex flex-col md:flex-row  justify-around my-3'>
