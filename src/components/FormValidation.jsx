@@ -37,7 +37,7 @@ const SignupForm = () => {
       confirmPassword:'',
       email: '',
       mobileNumber:'',
-      checkRule: "",
+      checkRule: false,
     },
     validationSchema: Yup.object({
       userName: Yup.string()
@@ -64,7 +64,7 @@ const SignupForm = () => {
       .required('Required'),
 
       checkRule:Yup.boolean()
-      .test('is-checked', 'Checkbox must be checked', value => value === true),
+      .test('is-checked', 'read and accept the rules', value => value === true),
 
 
     }),
@@ -159,7 +159,7 @@ const SignupForm = () => {
       {formik.errors.checkRule ? (
             <div className='text-red-500 text-sm md:text-md' >{formik.errors.checkRule}</div>
           ) : null}
-          <div className='flex mt-3 mb-7 ml-2'>
+          <div className='flex mt-2 mb-7 ml-2'>
           <input
             name="checkRule"
             checked={formik.checkRule}
@@ -170,7 +170,7 @@ const SignupForm = () => {
           </div>
       
       <div className='flex flex-col md:flex-row  justify-around my-3'>
-        <button className='bg-slate-600 w-auto text-white font-bold rounded-xl py-2 px-7' type="button" onClick={generatePassword}>
+        <button className='bg-slate-600 w-auto text-white font-bold rounded-xl py-2 px-2 md:px-7' type="button" onClick={generatePassword}>
           Generate Hard Password
         </button>
        <p className='text-slate-600 font-bold p-2 md:pt-1'>{handelGeneratePassword}</p>
