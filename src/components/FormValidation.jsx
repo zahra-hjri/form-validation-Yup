@@ -102,7 +102,7 @@ const SignupForm = () => {
         id="userName"
         name="userName"
         type="text" 
-        placeholder='User name'
+        placeholder='User name '
         onChange={formik.handleChange}
         onBlur={formik.handleBlur}
         value={formik.values.userName}
@@ -117,7 +117,7 @@ const SignupForm = () => {
         id="password"
         name="password"
         type="text"
-        placeholder='Password'
+        placeholder='Password - Similar to this : bntkh@F5PeUM'
         onChange={formik.handleChange}
         onBlur={formik.handleBlur}
         value={formik.values.password}
@@ -147,7 +147,7 @@ const SignupForm = () => {
         id="email"
         name="email"
         type="email"
-        placeholder='Email Address'
+        placeholder='Email Address -  Similar to this : test@mail.test'
         onChange={formik.handleChange}
         onBlur={formik.handleBlur}
         value={formik.values.email}
@@ -162,7 +162,7 @@ const SignupForm = () => {
         id="mobileNumber"
         name="mobileNumber"
         type="text"
-        placeholder='Mobile number'
+        placeholder='Mobile number - Similar to this : 09*********'
         onChange={formik.handleChange}
         onBlur={formik.handleBlur}
         value={formik.values.mobileNumber}
