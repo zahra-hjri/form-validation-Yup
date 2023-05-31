@@ -73,51 +73,27 @@ const SignupForm = () => {
 
 
     }),
-    onSubmit: (values) => {
+    onSubmit: () => {
       setSuccess(true);
-      // setShowModal(!showModal)
+      console.log("submit shod")
+      // {suceess && <Modal/>}
+      setShowModal(true)
     },
   });
   return (
     
    <div>
         {suceess &&
+        formik.handleSubmit && (
+          <Modal showModal={showModal} setShowModal={setShowModal}/>
+        )}
+
+        {/* {suceess &&
         formik.submitCount > 0 &&
         !Object.keys(formik.errors).length && (
           <Modal showModal={showModal} setShowModal={setShowModal}/>
-        
-        //   <>
-        //   <div
-        //     className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none"
-        //   >
-        //     <div className="relative my-6 mx-auto w-80 md:w-3/6">
-        //       {/*content*/}
-        //       <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
-               
-        //         {/*body*/}
-        //         <div className="relative p-4 md:p-6 flex-auto">
-        //           <p className="my-4 font-bold md:font-extrabold text-green-500 text-lg leading-relaxed text-center">
-        //           Registration was successful
-        //           </p>
-        //         </div>
-        //         {/*footer*/}
-        //         <div className="flex items-center justify-end p-2 border-t border-solid border-slate-200 rounded-b">
-        //           <button
-        //             className="text-white bg-red-500 rounded-lg font-bold uppercase px-4 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-        //             type="button"
-        //             onClick={() => setShowModal(false)}
-        //           >
-        //             Close
-        //           </button>
-                  
-        //         </div>
-        //       </div>
-        //     </div>
-        //   </div>
-        //   <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
-        // </>
-     
-        )}
+        )} */}
+
     <form onSubmit={formik.handleSubmit} className='flex flex-col bg-slate-900 border border-white w-72 md:w-3/5 lg:w-3/6 xl:w-5/12 rounded-lg mx-auto p-8'>
       {formik.touched.userName && formik.errors.userName ? (
         <div className='text-red-500 text-sm md:text-md'>{formik.errors.userName}</div>
