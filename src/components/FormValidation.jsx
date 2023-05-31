@@ -1,4 +1,5 @@
 import React,{useState} from 'react';
+import Modal from './Modal/Modal';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 
@@ -7,6 +8,7 @@ const SignupForm = () => {
 
   const [handelGeneratePassword, setHandelGeneratePassword] = useState("");
   const [suceess, setSuccess] = useState(false);
+  const [showModal, setShowModal] = useState(true);
 
 
   // ***************Start generate Hard Password Function *************//
@@ -57,7 +59,10 @@ const SignupForm = () => {
         .required('Required'),
 
 
-      email: Yup.string().email('Invalid email address').required('Required'),
+      email: Yup.string()
+      // .email('Invalid email address')
+      .matches(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/, 'Invalid email address')
+      .required('Required'),
 
       mobileNumber:Yup.string()
       .matches(/^09[0-9]{9}|٠٩[٠١٢٣٤٥٦٧٨٩]{9}|۰۹[۰۱۲۳۴۵۶۷۸۹]{9}$/, "Mobile number is wrong")
@@ -69,18 +74,51 @@ const SignupForm = () => {
 
     }),
     onSubmit: (values) => {
-      // alert(JSON.stringify(values, null, 2));
       setSuccess(true);
+      // setShowModal(!showModal)
     },
   });
   return (
-   <div className='pb-20'>
+    
+   <div>
         {suceess &&
         formik.submitCount > 0 &&
         !Object.keys(formik.errors).length && (
-          <p className=' text-green-400 py-3  mx-auto my-2 w-60 text-center font-bold'>Registration was successful</p>
+          <Modal showModal={showModal} setShowModal={setShowModal}/>
+        
+        //   <>
+        //   <div
+        //     className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none"
+        //   >
+        //     <div className="relative my-6 mx-auto w-80 md:w-3/6">
+        //       {/*content*/}
+        //       <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
+               
+        //         {/*body*/}
+        //         <div className="relative p-4 md:p-6 flex-auto">
+        //           <p className="my-4 font-bold md:font-extrabold text-green-500 text-lg leading-relaxed text-center">
+        //           Registration was successful
+        //           </p>
+        //         </div>
+        //         {/*footer*/}
+        //         <div className="flex items-center justify-end p-2 border-t border-solid border-slate-200 rounded-b">
+        //           <button
+        //             className="text-white bg-red-500 rounded-lg font-bold uppercase px-4 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+        //             type="button"
+        //             onClick={() => setShowModal(false)}
+        //           >
+        //             Close
+        //           </button>
+                  
+        //         </div>
+        //       </div>
+        //     </div>
+        //   </div>
+        //   <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
+        // </>
+     
         )}
-    <form onSubmit={formik.handleSubmit} className='flex flex-col bg-slate-900 border border-white w-72 md:w-3/5 lg:w-3/6 xl:w-5/12 rounded-lg mx-auto px-8 py-10'>
+    <form onSubmit={formik.handleSubmit} className='flex flex-col bg-slate-900 border border-white w-72 md:w-3/5 lg:w-3/6 xl:w-5/12 rounded-lg mx-auto p-8'>
       {formik.touched.userName && formik.errors.userName ? (
         <div className='text-red-500 text-sm md:text-md'>{formik.errors.userName}</div>
       ) : null}
@@ -169,13 +207,13 @@ const SignupForm = () => {
           <label className='px-2 text-white text-xs md:font-bold' htmlFor="">accept the rules</label>
           </div>
       
-      <div className='flex flex-col md:flex-row  justify-around my-3'>
-        <button className='bg-slate-600 w-auto text-white font-bold rounded-xl py-2 px-2 md:px-7' type="button" onClick={generatePassword}>
+      <div className='flex flex-col md:flex-row  justify-around my-1'>
+        <button className='bg-slate-600 w-auto text-white font-bold rounded-xl text-xs p-2 md:px-7' type="button" onClick={generatePassword}>
           Generate Hard Password
         </button>
-       <p className='text-slate-600 font-bold p-2 md:pt-1'>{handelGeneratePassword}</p>
+       <p className='text-slate-500 font-bold pt-2 md:pt-0 pl-2'>{handelGeneratePassword}</p>
        </div>
-      <button className='p-3 rounded-2xl bg-green-800 text-white font-bold w-52 md:w-60 lg:w-72 mx-auto my-10' type="submit">Submit</button>
+      <button className='p-2 rounded-2xl bg-green-800 text-white font-bold w-52 md:w-60 lg:w-72 mx-auto my-5' type="submit">Submit</button>
     </form>
    </div>
   );
